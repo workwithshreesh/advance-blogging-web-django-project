@@ -1,0 +1,82 @@
+{% extends "Main/base.html" %}
+{% block content %}
+{% load static %}
+	<!-- section main content -->
+	<section class="main-content-lg">
+        <div class="container-minimal">
+            <!-- post -->
+             {% for post in posts %}
+            <div class="post post-xl">
+                <!-- top section -->
+                <div class="post-top">
+                    <ul class="meta list-inline mb-0">
+                        <li class="list-inline-item"><a href="#"><img src="{% static 'images/other/author-sm.png' %}" class="author" alt="author"/>Katen Doe</a></li>
+                        <li class="list-inline-item">{{post.date}}</li>
+                        <li class="list-inline-item"><i class="icon-bubble"></i> ({{forloop.counter}})</li>
+                    </ul>
+                    <h5 class="post-title mb-0 mt-4"><a href="/content/{{post.slug}}">{{post.title|truncatechars:35}}</a></h5>
+                </div>
+                <!-- thumbnail -->
+                <div class="thumb rounded">
+                    <a href="/section/{{post.section}}" class="category-badge lg position-absolute">{{post.section}}</a>
+                    <span class="post-format">
+                        <i class="icon-picture"></i>
+                    </span>
+                    <a href="/content/{{post.slug}}">
+                        <div class="inner">
+                            <img src="/{{post.featured_image}}" alt="post-title" />
+                        </div>
+                    </a>
+                </div>
+                <!-- details -->
+                <div class="details">
+                    <p class="excerpt mb-0">{{post.content|safe|striptags|truncatechars:200}}</p>
+                </div>
+                <div class="post-bottom clearfix d-flex align-items-center">
+                    <div class="social-share me-auto">
+                        <button class="toggle-button icon-share"></button>
+                        <ul class="icons list-unstyled list-inline mb-0">
+                            <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fab fa-pinterest"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fab fa-telegram-plane"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="far fa-envelope"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="float-end d-none d-md-block">
+                        <a href="/content/{{post.slug}}" class="more-link">Continue reading<i class="icon-arrow-right"></i></a>
+                    </div>
+                    <div class="more-button d-block d-md-none float-end">
+                        <a href="blog-single.html"><span class="icon-options"></span></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <!-- pagination -->
+            <nav>
+                <ul class="pagination justify-content-center">
+                    {% if posts.has_previous %}
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="?page={{posts.previous_page_number}}">&laquo;&laquo;</a>
+                    </li>
+                    {% endif %}
+                    {% for num in posts.paginator.page_range %}
+                    {% if posts.number == num %}
+                    <li class="page-item active">
+                        <span class="page-link">{{num}}</span>
+                    </li>
+                    {% else %}
+						<li class="page-item">
+							<a class="page-link" href="?page={{ num }}">{{ num }}</a>
+						</li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+	</section>
+
+
+{% endblock %}
