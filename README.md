@@ -18,7 +18,7 @@ An advanced blogging platform built with Django, featuring a **custom rich text 
 ## Installation
 
 1. Clone the repository:
-   `git clone https://github.com/workwithshreesh/advanced-blogging-django.git`
+   `git clone https://github.com/workwithshreesh/advance-blogging-web-django-project.git`
    
 2. Navigate to the project directory:
    `cd advanced-blogging-django`
